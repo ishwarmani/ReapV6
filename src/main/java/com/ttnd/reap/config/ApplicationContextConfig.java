@@ -17,15 +17,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.ttnd.reap.model.RecievedBadges;
+import com.ttnd.reap.model.GivingBadges;
 import com.ttnd.reap.model.Employee;
-import com.ttnd.reap.model.GivingKitty;
-import com.ttnd.reap.model.RecievedKitty;
-import com.ttnd.reap.model.WallOfFame;
+import com.ttnd.reap.model.RecognizeKarma;;
 
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.ttnd.reap.controller","com.ttnd.reap.dao.impl","com.ttnd.reap.service.impl"})
+@ComponentScan({"com.ttnd.reap"})
 public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	private BasicDataSource dataSource;
@@ -51,7 +51,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 	public DataSource getDataSource() {
 		dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/Reap");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/Reapv2");
 		dataSource.setUsername("root");
 		dataSource.setPassword("ishwar");
 		return dataSource;
@@ -72,9 +72,9 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 		LocalSessionFactoryBuilder sesssionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sesssionBuilder.addProperties(getHibernateProperties());
 		sesssionBuilder.addAnnotatedClasses(Employee.class);
-		sesssionBuilder.addAnnotatedClass(GivingKitty.class);
-		sesssionBuilder.addAnnotatedClass(RecievedKitty.class);
-		sesssionBuilder.addAnnotatedClass(WallOfFame.class);
+		sesssionBuilder.addAnnotatedClass(GivingBadges.class);
+		sesssionBuilder.addAnnotatedClass(RecievedBadges.class);
+		sesssionBuilder.addAnnotatedClass(RecognizeKarma.class);
 		SessionFactory sessionFactory = sesssionBuilder.buildSessionFactory();
 		return sessionFactory;
 	}

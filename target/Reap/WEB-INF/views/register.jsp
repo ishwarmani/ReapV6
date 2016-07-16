@@ -1,80 +1,117 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Custom Login Form</title>
 
-        <link rel="stylesheet" href="<c:url value ="/resources/css/style.css" />">
 
-  </head>
-  <body>
+<html>
+<head>
+<title>Registration</title>
+<link rel="shortcut icon"
+	href="<c:url value ="/resources/images/register_logo.png"/>">
+<link rel="stylesheet"
+	href="<c:url value ="/resources/css/bootstrap-3.3.6-dist/css/bootstrap.min.css" />">
+<script src="<c:url value ="/resources/css/jquery-2.2.0.min.js" />"></script>
+<script
+	src="<c:url value ="/resources/css/bootstrap-3.3.6-dist/js/bootstrap.min.js" />"></script>
 
-    <div id="wrapper">
-        
-      	<div class="clr"></div>
-        <div class="login-options">Choose on of the following sign up methods.</div>
-        <a class="twitter" href="#">Twitter</a>
-        <a class="facebook" href="#">Facebook</a>
-        <a class="google" href="#">Google+</a>
-        <div class="clr"><hr /></div>
-        <div class="mail-text">Or sign up using your email address.</div>
-        <div class="forms">
-                <form:form action="register" method="POST">
-                          <form:input path="name" type="text" placeholder ="Enter your full name" size="60" onClick="border: 1px solid #30a8da;" id="name"/>
-                         <form:input path="email" type="text" placeholder ="Enter your email address" size="60" onClick="border: 1px solid #30a8da;" id="email"/>
-                         <form:input path="password" type="password" placeholder ="Enter a password" size="60" onClick="border: 1px solid #30a8da;" id="password"/>
-                         <input type="password" placeholder ="Re-Enter the password" size="60" onClick="border: 1px solid #30a8da;" id="password"/>
+<link rel="stylesheet"
+	href="<c:url value ="/resources/css/font-awesome-4.6.3/css/font-awesome.min.css" />">
+<link rel="stylesheet"
+	href="<c:url value ="/resources/css/styleRegister.css" />">
+</head>
+<body>
 
-                      <form:select path="serviceLine" defaultLabel="Service Lines" id="serviceLine"  >
-                        <option value="">Service Lines</option>
-                        <option value="2" >Analytics</option>
-                        <option value="12" >Analytics-SEA</option>
-                        <option value="9" >Digital Marketing</option>
-                        <option value="20" >Digital Marketing India</option>
-                        <option value="13" >Digital Marketing-SEA</option>
-                        <option value="1" >Technology</option>
-                        <option value="6" >ThoughtBuzz India</option>
-                        <option value="21" >TTN Overheads</option>
-                        <option value="23" >TTND-Intern</option>
-                        <option value="17" >TTND-SEA</option>
-                        <option value="22" >TTNV</option>
-                        <option value="19" >Video Solutions</option>
-                      </form:select>
-                      
+	<form:form action="register" method="POST">
+		<div class="login-container">
+			<div class="panel shadow">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel-header">
+							<img class="panelLogo"
+								src="<c:url value ="/resources/images/combineLogo.png"/>">
+						</div>
+					</div>
+				</div>
 
-                     <!--  private String employeeID;
-                      private String name;
-                      private String email;
-                      private UserRole userRole;
-                      private String serviceLine;
-                      private String password; -->
+				<div class="panel-body">
 
-                    
-                      <form:select path="practice" defaultLabel="Practices" >
-                        <option value="">Practices</option>
-                        <option value="6" >Admin</option>
-                        <option value="14" >AMC</option>
-                        <option value="63" >Analytics</option>
-                        <option value="46" >Analytics-SEA</option>
-                        <option value="20" >BigData</option>
-                        <option value="80" >BlogMint</option>
-                        <option value="70" >Business Development</option>
-                        <option value="37" >Creative</option>
-                        <option value="10" >Design</option>
-                        <option value="71" >DevOps</option>
-                        
-                      </form:select>
-                  	
-                  	<input type="submit" class="create-acc" value="Create My Account"/>
-               </form:form>
-        </div>	
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label class="classWithPad" for="exampleInputName2">Name</label>
+							<br /> <label class="classWithPad" for="exampleInputEmail2">E-Mail</label><br />
+							<label class="classWithPad" for="exampleInputEmail2">Password</label><br />
+							<!-- <label class="classWithPad" for="exampleInputEmail2">Password</label><br/> -->
+							<label class="classWithPad" for="exampleInputEmail2">Confirm
+								Password</label> <label class="classWithPad" for="exampleInputEmail2">Service
+								line</label><br /> <label class="classWithPad" for="exampleInputEmail2">Practices</label><br />
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<div class="form-group">
 
-    </div>
-  </body>
+
+							<form:input path="employeeName" type="text" class="form-control classWithPad"
+								id="exampleInputName2" placeholder="Username" />
+							<form:input path="email" type="email" class="form-control classWithPad"
+								id="exampleInputEmail2" placeholder="E-mail ID" />
+							<form:input path="password" type="password" class="form-control classWithPad"
+								id="exampleInputPass3" placeholder="Password" />
+							<input  type="password" class="form-control classWithPad"
+								id="exampleInputConfPass4" placeholder="Confirm Password" />
+
+
+							<form:select path="serviceLine" defaultLabel="Service Lines"
+								id="serviceLine" class="classWithPad1">
+								<option value="Service Lines">Service Lines</option>
+								<option value="Analytics">Analytics</option>
+								<option value="Analytics-SEA">Analytics-SEA</option>
+								<option value="Digital Marketing">Digital Marketing</option>
+								<option value="Digital Marketing India">Digital Marketing India</option>
+								<option value="Digital Marketing-SEA">Digital Marketing-SEA</option>
+								<option value="Technology">Technology</option>
+								<option value="ThoughtBuzz India">ThoughtBuzz India</option>
+								<option value="TTN Overheads">TTN Overheads</option>
+								<option value="TTND-Intern">TTND-Intern</option>
+								<option value="TTND-SEA">TTND-SEA</option>
+								<option value="TTNV">TTNV</option>
+								<option value="Video Solutions">Video Solutions</option>
+							</form:select>
+
+							<form:select path="practice" defaultLabel="Practices"
+								class="classWithPad1">
+								<option value="Practices">Practices</option>
+								<option value="Admin">Admin</option>
+								<option value="AMC">AMC</option>
+								<option value="Analytics">Analytics</option>
+								<option value="Analytics-SEA">Analytics-SEA</option>
+								<option value="BigData">BigData</option>
+								<option value="BlogMint">BlogMint</option>
+								<option value="Business Development">Business Development</option>
+								<option value="Creative">Creative</option>
+								<option value="Design">Design</option>
+								<option value="DevOps">DevOps</option>
+
+							</form:select>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-11">
+							<button type="Submit" class="btn btn-primary pull-right submit">Submit</button>
+							<button type="button"
+								class="btn btn-primary pull-left socialLogin">Sign-In
+								With Google</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form:form>
+
+
+</body>
 </html>

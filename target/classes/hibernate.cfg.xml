@@ -9,7 +9,7 @@
 
 		<!-- Database connection settings -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Reap</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Reapv2</property>
 
 		<property name="connection.username">root</property>
 		<property name="connection.password">ishwar</property>
@@ -28,9 +28,9 @@
 
 
 		<mapping class="com.ttnd.reap.model.Employee" />
-		<mapping class="com.ttnd.reap.model.GivingKitty" />
-		<mapping class="com.ttnd.reap.model.RecievedKitty" />
-		<mapping class="com.ttnd.reap.model.WallOfFame" />
+		<mapping class="com.ttnd.reap.model.GivingBadges" />
+		<mapping class="com.ttnd.reap.model.RecievedBadges" />
+		<mapping class="com.ttnd.reap.model.RecognizeKarma" />
 
 	</session-factory>
 

@@ -7,30 +7,30 @@
 
 	<session-factory>
 
-		Database connection settings
+		<!-- Database connection settings -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Reap</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/FinalReap</property>
 
 		<property name="connection.username">root</property>
 		<property name="connection.password">ishwar</property>
 
-		JDBC connection pool (use the built-in)
+		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
 
-		SQL dialect
+		
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-		Echo all executed SQL to stdout
+		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 
-		Drop and re-create the database schema on startup
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
 
 
 		<mapping class="com.ttnd.reap.model.Employee" />
-		<mapping class="com.ttnd.reap.model.GivingKitty" />
-		<mapping class="com.ttnd.reap.model.RecievedKitty" />
-		<mapping class="com.ttnd.reap.model.WallOfFame" />
+		<mapping class="com.ttnd.reap.model.BadgesRecords" />
+		<mapping class="com.ttnd.reap.model.BadgesRecieved" />
+		<mapping class="com.ttnd.reap.model.RecognizeKarma" />
 
 	</session-factory>
 

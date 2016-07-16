@@ -1,0 +1,33 @@
+.login-container {
+	margin: auto;
+	margin-top: 150px;
+	margin-left: 450px;
+	width: 520px;
+}
+
+input {
+	float: right;
+	border: 2px solid #dadada;
+	border-radius: 7px;
+	font-size: 20px;
+	padding: 5px;
+	margin-top: -10px;
+}
+
+input:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+.shadow {
+	box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.panelLogo {
+	width: 520px;
+}
+
+.inputField {
+	width: 300px;
+}

@@ -1,0 +1,50 @@
+.login-container {
+	margin: auto;
+	margin-top: 40px;
+	margin-left: 400px;
+	width: 520px;
+	/* Whatever exact width you are looking for (not bound by preset bootstrap widths) */
+}
+
+input {
+	float: right;
+	border: 2px solid #dadada;
+	border-radius: 7px;
+	font-size: 20px;
+	padding: 5px;
+	margin-top: -10px;
+}
+
+input:focus {
+	outline: none;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+.shadow {
+	box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.classWithPad {
+	margin: 10px;
+	padding: 9px;
+	width: 230px;
+}
+
+.classWithPad1 {
+	margin: 10px;
+	padding: 12px;
+	width: 230px;
+}
+
+.panelLogo {
+	width: 515px;
+}
+
+.submit {
+	width: 100px;
+}
+
+.socialLogin {
+	width: 200px;
+}

@@ -2,19 +2,20 @@ package com.ttnd.reap.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Employee {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String employeeId;
@@ -26,6 +27,8 @@ public class Employee {
 	private String practice;
 	private String password;
 	private Byte[] image;
+	@Type(type = "yes_no")
+	private Boolean flag;
 
 	@OneToOne // (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "RemainingBadges")
@@ -34,6 +37,14 @@ public class Employee {
 	@OneToOne // (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "RecievedBadges")
 	private RecievedBadges recievedBadges;
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 
 	public String getPassword() {
 		return password;
@@ -130,12 +141,4 @@ public class Employee {
 	public void setServiceLine(String serviceLine) {
 		this.serviceLine = serviceLine;
 	}
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", employeeId=" + employeeId + ", employeeName=" + employeeName + ", email="
-				+ email + ", userRole=" + userRole + ", serviceLine=" + serviceLine + ", dateOfJoining=" + dateOfJoining
-				+ "]";
-	}
-
 }

@@ -34,6 +34,43 @@
       src="
       <c:url value ="/resources/js/index.js" />
       "></script>
+      <script
+	src="<c:url value ="/resources/js/jquery.autocomplete.min.js" />"></script>
+      <script>
+
+  	$(document).ready(function() {
+
+  		$('#newer-txtbx').autocomplete({
+  			serviceUrl: '${pageContext.request.contextPath}/getEmployee',
+  			paramName: "name",
+  			delimiter: ",",
+  		    transformResult: function(response) {
+  		    	
+  		        return {
+  		        	
+  		            suggestions: $.map($.parseJSON(response), function(item) {
+  		            	
+  		                return { value: item.employeeName  +","
+  		                	 + item.employeeId,
+  		                	data: item.email };
+  		            })
+  		            
+  		        };
+  		        
+  		    }
+  		    
+  		});
+  		
+  		
+  	});
+  	
+  	
+  	</script>
+  	
+      
+      
+      </script>
+      
    </head>
    <body style="background-color:f6fbff">
       <div class="modal fade" id="myModalload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" width="5px">
@@ -93,7 +130,7 @@
                      </a>
                   </li>
                   <li class="buttons buttonhover2">
-                     <a href="#">
+                     <a href="badge">
                      <span class="fa-stack">
                      <i class="fa fa-circle fa-stack-2x"></i>
                      <i class="fa fa-star-o fa-stack-1x fa-inverse"></i>
@@ -138,6 +175,7 @@
                                  ">
                                  <div class="pull-left">
                                     Newer Name :  ${loggedInUser.getEmployeeName()}<br/>
+                                   
                                     Service Line &nbsp;: ${loggedInUser.getServiceLine()}<br/>
                                     Practice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${loggedInUser.getPractice()}<br/>
                                     Email-ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${loggedInUser.getEmail()}<br/>
@@ -181,7 +219,7 @@
       </div>
       <!-- main body -->
       <!-- karma section -->
-      <div class="col-sm-9">
+      <div class="col-sm-7 col-md-7 col-lg-9">
          <div class="row">
          </div>
          <div class="col-sm-12">
@@ -201,33 +239,19 @@
                                  <span class="input-group-addon" >
                                  <span class="glyphicon glyphicon-user"></span>
                                  </span>
-                                 <form:input type="text" path="recieverId" class="form-control" id="newer-txtbx" placeholder="Select a newer"/>
+                                
+                                 <form:input type="text" name="user" path="recieverId" class="form-control" id="newer-txtbx" placeholder="Select a newer"/>
                               </div>
                            </div>
                            <!-- select badge section -->
                            <div class="col-sm-3">
                               <form:select class="form-control"  path="star" id="badge">
                                  <option value="0">Select a Badge</option>
-                                 <option value="Gold">Gold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getGold()}</option>
-                                 <option value="Extra Miler">Silver&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getSilver()}</option>
-                                 <option value="Knowledge Sharing">Bronze&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getBronze()}</option>
+                                 <option value="gold">Gold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getGold()}</option>
+                                 <option value="silver">Silver&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getSilver()}</option>
+                                 <option value="bronze">Bronze&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getBronze()}</option>
                               </form:select>
-                              <%-- <div class="btn-group">    <!-- CURRENCY, BOOTSTRAP DROPDOWN -->
-                                 <!--<a class="btn btn-primary" href="javascript:void(0);">Currency</a>-->
-                                 <button class="btn btn-default btn-block dropdown-toggle text-left" data-toggle="dropdown" style="width:160px;text-align:left;">Select a Badge<span class="caret"></span></button>
-                                 <ul class="dropdown-menu">
-                                 		<li><span><a href="javascript:void(0);">
-                                 				
-                                 				<img src="<c:url value ="/resources/images/icon_gold_badge.png"/>">&nbsp;&nbsp;Gold</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2)</span>
-                                 		</li>
-                                 		<li><span><a href="javascript:void(0);">
-                                 				<img src="<c:url value ="/resources/images/icon_silver_badge.png"/>">&nbsp;&nbsp;Silver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4)</span>
-                                 		</li>
-                                 		<li><span><a href="javascript:void(0);">
-                                 				<img src="<c:url value ="/resources/images/icon_broze_badge.png"/>">&nbsp;&nbsp;Bronze</a>&nbsp;&nbsp;&nbsp;(6)</span>
-                                 </ul>
-                                 </div> --%>
-                              <!-- </div> -->
+                              
                            </div>
                            <div class="col-sm-3">
                               <div class="row">
@@ -278,21 +302,7 @@
                         <div class="row">
                            <form class="form" role="form">
                               <div class="col-lg-4">
-                                 <!-- <div class="input-group margin-bottom-sm">
-                                    <input name="txtName" id="txtName" style="width:200px">
-                                    
-                                    <i class="fa fa-search errspan" aria-hidden="true"></i>
-                                    <style>
-                                    .errspan {
-                                    	    float: left;
-                                    	    margin-left: 6px;
-                                    	    margin-top: -20px;
-                                    	    position: relative;
-                                    	    z-index: 2;
-                                    	    color: black;
-                                    				}
-                                    </style>
-                                    </div> -->
+                                
                                  <div class="input-group">
                                     <span class="input-group-addon">
                                     <i class="fa fa-search"></i>
@@ -342,42 +352,39 @@
                </div>
                <div class="panel-body">
                   <div class="row" style="padding-top: 20px;">
-                     <div class="col-xs-2 " style = "text-align: center;">
+                    
+            
+            
+            <c:forEach  items="${recKarma}"  var="user">
+            <div class="col-xs-12" >
+            			<div class="col-xs-2 " style = "text-align: center;">
                         <img class="imager wallOfFamePost"
                         src="
                         <c:url value ="/resources/images/myimage.jpg"/>
                         "> 
                      </div>
-                     <div class="col-xs-9" >
-                        <p>
-                           Reason : I would like to recognize you for motivating, guiding, and sharing knowledge on different topics during Bootcamp.
-                           Reason : I would like to recognize you for motivating, guiding, and sharing knowledge on different topics during Bootcamp.
-                        </p>
-                     </div>
+			              ${user.getRecieverName()} has received ${user.getStar()} 
+			             
+			              
+			             
+			             from ${user.getSenderName()} for Karma ${user.getKarma()} <br/>
+			                           Reason : ${user.getMessage()} <br/> <hr></hr>   
+            
+            </div>
+            	
+            </c:forEach>
+                     
                   </div>
                   <hr>
-                  <div class="row" style="padding-top: 20px;">
-                     <div class="col-xs-2 " style="text-align: center;">
-                        <img class="imager wallOfFamePost"
-                        src="
-                        <c:url value ="/resources/images/myimage.jpg"/>
-                        "> 
-                     </div>
-                     <div class="col-xs-9">
-                        <p>
-                           Reason : I would like to recognize you for motivating, guiding, and sharing knowledge on different topics during Bootcamp.
-                           Reason : I would like to recognize you for motivating, guiding, and sharing knowledge on different topics during Bootcamp.
-                        </p>
-                     </div>
-                  </div>
-                  <hr>
+                  </hr>
+                  
                </div>
             </div>
             <!-- end wall of fame -->
          </div>
       </div>
       <!-- side patch profile/ -->
-      <div class="col-sm-7 col-md-5 col-lg-3 ">
+      <div class="col-sm-5 col-md-5 col-lg-3 ">
       <div class="row">
          <div class="col-sm-12" style="padding: 0% 5.5%">
             <div class="panel panel-default">
@@ -388,13 +395,13 @@
                </div>
                <div class="panel-body" >
                   <div class="row">
-                     <div class="col-sm-4">
+                     <div class="col-sm-5">
                         <img class="sideBatchPic profile-pic"
                         src="
                         <c:url value ="/resources/images/myimage.jpg"/>
                         ">
                      </div>
-                     <div class="col-sm-8">
+                     <div class="col-sm-7">
                         <div class="row">
                            <div class="col-sm-12">
                               <a href="#"><b> ${loggedInUser.getEmployeeName()} </b></a>
@@ -440,34 +447,25 @@
       <div class="panel" style="height:630px;width:275px">
          <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#tab_a" data-toggle="tab">Newer Board</a></li>
-            <li><a href="#tab_b" data-toggle="tab">Ideas</a></li>
+            
          </ul>
          <div class="tab-content">
             <!-- gap-->													
             <div class="tab-pane active" id="tab_a">
-               <div class="row" style="height:10px">
-               </div>
-               <!-- 1st -->													
+              <!--  <div class="row" style="height:10px">
+               </div> -->
+               <!-- 1st -->	
+            											
                <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content"id="userBadgeDetail_1116">
-                        <div class="badgecontentleft">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
+
                   <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
+      <!-- open -->      <c:forEach  items="${newerBoard}"  var="user"> 	
+              
                   <div class="col-xs-7">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
                      <div class="row">
                         <div class="row" style="height:30px">
                         </div>
-                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mayank Agnihotri</a><br/>
+                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user.getName()}</a><br/>
                      </div>
                      <div class="row">
                         <span>
@@ -493,254 +491,20 @@
                         </div> -->
                      <div class="row">
                         <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${user.getBadges().getGold() }</i>
                         </span>
                         <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${user.getBadges().getSilver() }</i>
                         </span>
                         <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${user.getBadges().getBronze() }</i>
                         </span>
                      </div>
                   </div>
+                  <!-- close -->      </c:forEach>
+          
                </div>
-               <!-- gap-->															 	
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content"id="userBadgeDetail_1116">
-                        <div class="badgecontentleft">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-7">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mayank Agnihotri</a><br/>
-                     </div>
-                     <div class="row">
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="gold badge" src="
-                           <c:url value ="/resources/images/icon_gold_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="silver badge" src="
-                           <c:url value ="/resources/images/icon_silver_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="bronze badge" src="
-                           <c:url value ="/resources/images/icon_broze_badge.png"/>
-                           ">
-                        </span>
-                     </div>
-                     <!-- <div class="row center1">
-                        <img src="assets/icon_gold_badge.png">
-                        <img src="assets/icon_silver_badge.png">
-                        <img src="assets/icon_broze_badge.png">
-                        </div> -->
-                     <div class="row">
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-               <!-- gap-->									 							
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content"id="userBadgeDetail_1116">
-                        <div class="badgecontentleft">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-7">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mayank Agnihotri</a><br/>
-                     </div>
-                     <div class="row">
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="gold badge" src="
-                           <c:url value ="/resources/images/icon_gold_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="silver badge" src="
-                           <c:url value ="/resources/images/icon_silver_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="bronze badge" src="
-                           <c:url value ="/resources/images/icon_broze_badge.png"/>
-                           ">
-                        </span>
-                     </div>
-                     <!-- <div class="row center1">
-                        <img src="assets/icon_gold_badge.png">
-                        <img src="assets/icon_silver_badge.png">
-                        <img src="assets/icon_broze_badge.png">
-                        </div> -->
-                     <div class="row">
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-               <!-- gap-->															
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content"id="userBadgeDetail_1116">
-                        <div class="badgecontentleft">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-7">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mayank Agnihotri</a><br/>
-                     </div>
-                     <div class="row">
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="gold badge" src="
-                           <c:url value ="/resources/images/icon_gold_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="silver badge" src="
-                           <c:url value ="/resources/images/icon_silver_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="bronze badge" src="
-                           <c:url value ="/resources/images/icon_broze_badge.png"/>
-                           ">
-                        </span>
-                     </div>
-                     <!-- <div class="row center1">
-                        <img src="assets/icon_gold_badge.png">
-                        <img src="assets/icon_silver_badge.png">
-                        <img src="assets/icon_broze_badge.png">
-                        </div> -->
-                     <div class="row">
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-               <!-- gap-->								 						
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content"id="userBadgeDetail_1116">
-                        <div class="badgecontentleft">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-7">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mayank Agnihotri</a><br/>
-                     </div>
-                     <div class="row">
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="gold badge" src="
-                           <c:url value ="/resources/images/icon_gold_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="silver badge" src="
-                           <c:url value ="/resources/images/icon_silver_badge.png"/>
-                           ">
-                        </span>
-                        <span>
-                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="bronze badge" src="
-                           <c:url value ="/resources/images/icon_broze_badge.png"/>
-                           ">
-                        </span>
-                     </div>
-                     <!-- <div class="row center1">
-                        <img src="assets/icon_gold_badge.png">
-                        <img src="assets/icon_silver_badge.png">
-                        <img src="assets/icon_broze_badge.png">
-                        </div> -->
-                     <div class="row">
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                        <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>0</i>
-                        </span>
-                     </div>
-                  </div>
-               </div>
-               <!-- gap-->																
+         																
                <div class="row" style="height:20px">
                </div>
                <div class="row pull-right">
@@ -749,157 +513,7 @@
                   </div>
                </div>
             </div>
-            <div class="tab-pane" id="tab_b">
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content" id="userBadgeDetail_1116">
-                        <div class="badge-content-left">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-6">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row">
-                           New REAP DESIGN<br>
-                           -Virtual Architect
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content" id="userBadgeDetail_1116">
-                        <div class="badge-content-left">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-6">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <div class="row">
-                           New REAP DESIGN<br>
-                           -Virtual Architect
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content" id="userBadgeDetail_1116">
-                        <div class="badge-content-left">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-6">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <div class="row">
-                           New REAP DESIGN<br>
-                           -Virtual Architect
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content" id="userBadgeDetail_1116">
-                        <div class="badge-content-left">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-6">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <div class="row">
-                           New REAP DESIGN<br>
-                           -Virtual Architect
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row">
-                  <div class="col-xs-5">
-                     <div class="badge-content" id="userBadgeDetail_1116">
-                        <div class="badge-content-left">
-                           <img class="batchListPic img-rounded"
-                           src="
-                           <c:url value ="/resources/images/myimage.jpg"/>
-                           ">
-                        </div>
-                     </div>
-                  </div>
-                  <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-                  <div class="col-xs-6">
-                     <!-- <div class="row center1">
-                        <a href="#">Mayank Agnihotri</a><br/>
-                        </div> -->
-                     <div class="row">
-                        <div class="row" style="height:30px">
-                        </div>
-                        <div class="row">
-                           New REAP DESIGN<br>
-                           -Virtual Architect
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row" style="height:10px">
-               </div>
-               <div class="row pull-right">
-                  <div class="col-sm-12">
-                     <a href="">view all</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+            
       <!-- list of badges end -->
       <!-- end side batch profile -->
    </body>

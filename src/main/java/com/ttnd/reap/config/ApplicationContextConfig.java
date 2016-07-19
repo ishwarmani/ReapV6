@@ -17,9 +17,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.ttnd.reap.model.RecievedBadges;
-import com.ttnd.reap.model.GivingBadges;
 import com.ttnd.reap.model.Employee;
+import com.ttnd.reap.model.GivingBadges;
+import com.ttnd.reap.model.RecievedBadges;
 import com.ttnd.reap.model.RecognizeKarma;;
 
 
@@ -51,7 +51,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 	public DataSource getDataSource() {
 		dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/Reapv2");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/ReapV6");
 		dataSource.setUsername("root");
 		dataSource.setPassword("ishwar");
 		return dataSource;
@@ -63,7 +63,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.put("hibernate.current_session_context_class", "thread");
-		properties.put("hbm2ddl.auto", "update");
+		properties.put("hibernate.hbm2ddl.auto", "create");
 		return properties;
 	}
 

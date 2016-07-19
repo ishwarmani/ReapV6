@@ -21,11 +21,63 @@
 	href="<c:url value ="/resources/css/font-awesome-4.6.3/css/font-awesome.min.css" />">
 <link rel="stylesheet"
 	href="<c:url value ="/resources/css/styleRegister.css" />">
+	
+	
+	<script language="javascript" type="text/javascript">
+    $(document).ready(function(){
+         $(".dropdown-menu").on('click', 'li a', function(){
+  $("#serviceLine:first-child").text($(this).text());
+  $("#serviceLine:first-child").val($(this).text());
+  $("#Practices:first-child").text($(this).text());
+  $("#Practices:first-child").val($(this).text());
+});
+
+    });
+    function checkDetails(){
+         var name=$("#exampleInputName2").val();
+        var id=$("#exampleInputEmail2").val();
+        
+var password = $("#exampleInputPass3").val();
+var confirmPassword = $("#exampleInputConfPass4").val();
+        var serviceLine = $("#serviceLine").val();
+        var practices=$("#Practices").val();
+    
+       
+        if(name==""||id==""||password==""||confirmPassword==""){
+           return true;
+        }
+        else 
+            return false;
+       
+    }
+    function checkPasswordMatch() {
+      
+        var password = $("#exampleInputPass3").val();
+var confirmPassword = $("#exampleInputConfPass4").val();
+       
+     if ((password == confirmPassword)){
+  
+ 
+    $("#btn").prop('disabled',false);
+  	
+      }
+     else{
+    	 alert("Password Mismatch");
+    	   $("#exampleInputPass3").cleanData;
+    	    $("#exampleInputConfPass4").cleanData;
+    	    $("#btn").prop("disabled","disabled");
+    	 }
+     
+       
+       }
+	</script>
 </head>
 <body>
 
 	<form:form action="register" method="POST">
-		<div class="login-container">
+	<div class="row">
+        <div class="col-xs-12">
+		<div class="login-container center">
 			<div class="panel shadow">
 				<div class="row">
 					<div class="col-sm-12">
@@ -37,14 +89,14 @@
 				</div>
 
 				<div class="panel-body">
-
+					<div class="row">
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label class="classWithPad" for="exampleInputName2">Name</label>
 							<br /> <label class="classWithPad" for="exampleInputEmail2">E-Mail</label><br />
 							<label class="classWithPad" for="exampleInputEmail2">Password</label><br />
 							<!-- <label class="classWithPad" for="exampleInputEmail2">Password</label><br/> -->
-							<label class="classWithPad" for="exampleInputEmail2">Confirm
+							<label class="classWithPad" for="exampleInputEmail2" >Confirm
 								Password</label> <label class="classWithPad" for="exampleInputEmail2">Service
 								line</label><br /> <label class="classWithPad" for="exampleInputEmail2">Practices</label><br />
 						</div>
@@ -54,17 +106,17 @@
 
 
 							<form:input path="employeeName" type="text" class="form-control classWithPad"
-								id="exampleInputName2" placeholder="Username" />
+								id="exampleInputName2" placeholder="Username" required="true" />
 							<form:input path="email" type="email" class="form-control classWithPad"
-								id="exampleInputEmail2" placeholder="E-mail ID" />
+								id="exampleInputEmail2" placeholder="E-mail ID"  required="true"/>
 							<form:input path="password" type="password" class="form-control classWithPad"
-								id="exampleInputPass3" placeholder="Password" />
+								id="exampleInputPass3" placeholder="Password"  required="true"/>
 							<input  type="password" class="form-control classWithPad"
-								id="exampleInputConfPass4" placeholder="Confirm Password" />
+								id="exampleInputConfPass4" placeholder="Confirm Password" onblur="checkPasswordMatch()"  required="true"/>
 
 
 							<form:select path="serviceLine" defaultLabel="Service Lines"
-								id="serviceLine" class="classWithPad1">
+								id="serviceLine" class="classWithPad1"  required="true">
 								<option value="Service Lines">Service Lines</option>
 								<option value="Analytics">Analytics</option>
 								<option value="Analytics-SEA">Analytics-SEA</option>
@@ -81,7 +133,7 @@
 							</form:select>
 
 							<form:select path="practice" defaultLabel="Practices"
-								class="classWithPad1">
+								class="classWithPad1"  required="true">
 								<option value="Practices">Practices</option>
 								<option value="Admin">Admin</option>
 								<option value="AMC">AMC</option>
@@ -101,13 +153,14 @@
 
 					<div class="row">
 						<div class="col-sm-11">
-							<button type="Submit" class="btn btn-primary pull-right submit">Submit</button>
-							<button type="button"
-								class="btn btn-primary pull-left socialLogin">Sign-In
-								With Google</button>
+							<button type="Submit" id="btn" class="btn btn-primary pull-right submit" style="padding-left: 40px; padding-right: 40px; onclick=checkPasswormatch()">Submit</button>
+							<a class="pull-left" href"login">Already a Member !</a>
 						</div>
 					</div>
 				</div>
+			</div>
+			</div>
+			</div>
 			</div>
 		</div>
 	</form:form>

@@ -13,6 +13,7 @@
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/config/ContextLoaderListenerConfig.java
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/enums/Karma.java
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/config/ApplicationContextConfig.java
+/home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/controller/AdminController.java
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/dao/impl/RecognizeKarmaImpl.java
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/util/ReapUtil.java
 /home/ishwar/workspaceEE_mars/ReapV6/src/main/java/com/ttnd/reap/controller/HomeController.java

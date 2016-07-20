@@ -26,17 +26,18 @@ import com.ttnd.reap.service.IRecognizeKarmaService;
 
 @Controller
 public class HomeController {
-
+	@Autowired
 	private IEmployeeService employeeService;
+	@Autowired
 	private IRecognizeKarmaService recognizeKarmaService;
 
-	List<Employee> data = new ArrayList<Employee>();
-
-	@Autowired
+	/*@Autowired
 	public void setUserService(IEmployeeService employeeService, IRecognizeKarmaService recognizeKarmaService) {
 		this.employeeService = employeeService;
 		this.recognizeKarmaService = recognizeKarmaService;
-	}
+	}*/
+
+	List<Employee> data = new ArrayList<Employee>();
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(HttpSession session) {
@@ -100,11 +101,13 @@ public class HomeController {
 
 		employee = employeeService.login(email, password);
 		// RecievedBadges rec = new RecievedBadges();
-
-		System.out.println(employee);
 		if (employee == null) {
 			return new ModelAndView("login");
-		} else {
+		}
+		else if(employee.getUserRole().equals("admin")){
+			return new ModelAndView("redirect:admin");
+		}
+		 else {
 
 			List<NewerBoard> newerBoard = employeeService.getNewerList();
 			session.setAttribute("loggedInUser", employee);

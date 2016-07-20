@@ -9,15 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 public class Employee {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String employeeId;
 	private String employeeName;
 	private String email;
@@ -27,9 +23,9 @@ public class Employee {
 	private String practice;
 	private String password;
 	private Byte[] image;
-	@Type(type = "yes_no")
-	private Boolean flag;
-
+	// @Type(type = "yes_no")
+	// private Boolean flag;
+//
 	@OneToOne // (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "RemainingBadges")
 	private GivingBadges givingBadges;// badgesAvailabe
@@ -37,62 +33,6 @@ public class Employee {
 	@OneToOne // (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "RecievedBadges")
 	private RecievedBadges recievedBadges;
-
-	public Boolean getFlag() {
-		return flag;
-	}
-
-	public void setFlag(Boolean flag) {
-		this.flag = flag;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPractice() {
-		return practice;
-	}
-
-	public void setPractice(String practice) {
-		this.practice = practice;
-	}
-
-	public Byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(Byte[] image) {
-		this.image = image;
-	}
-
-	public GivingBadges getGivingBadges() {
-		return givingBadges;
-	}
-
-	public void setGivingBadges(GivingBadges givingBadges) {
-		this.givingBadges = givingBadges;
-	}
-
-	public RecievedBadges getRecievedBadges() {
-		return recievedBadges;
-	}
-
-	public void setRecievedBadges(RecievedBadges recievedBadges) {
-		this.recievedBadges = recievedBadges;
-	}
-
-	public Date getDateOfJoining() {
-		return dateOfJoining;
-	}
-
-	public void setDateOfJoining(Date dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
-	}
 
 	public int getId() {
 		return id;
@@ -141,4 +81,61 @@ public class Employee {
 	public void setServiceLine(String serviceLine) {
 		this.serviceLine = serviceLine;
 	}
+
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+	public String getPractice() {
+		return practice;
+	}
+
+	public void setPractice(String practice) {
+		this.practice = practice;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(Byte[] image) {
+		this.image = image;
+	}
+
+	public GivingBadges getGivingBadges() {
+		return givingBadges;
+	}
+
+	public void setGivingBadges(GivingBadges givingBadges) {
+		this.givingBadges = givingBadges;
+	}
+
+	public RecievedBadges getRecievedBadges() {
+		return recievedBadges;
+	}
+
+	public void setRecievedBadges(RecievedBadges recievedBadges) {
+		this.recievedBadges = recievedBadges;
+	}
+
+	// public Boolean getFlag() {
+	// return flag;
+	// }
+	//
+	// public void setFlag(Boolean flag) {
+	// this.flag = flag;
+	// }
+
 }

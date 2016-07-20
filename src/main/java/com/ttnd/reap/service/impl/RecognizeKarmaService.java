@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ttnd.reap.dao.IEmployeeDao;
 import com.ttnd.reap.dao.IRecognizeKarmaDao;
-import com.ttnd.reap.model.Employee;
 import com.ttnd.reap.model.RecognizeKarma;
 import com.ttnd.reap.service.IRecognizeKarmaService;
 

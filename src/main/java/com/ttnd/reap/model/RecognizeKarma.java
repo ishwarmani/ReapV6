@@ -26,8 +26,6 @@ public class RecognizeKarma {
 	private String recieverId;
 	private String senderId;
 	private String message;
-	// @Enumerated(EnumType.STRING)
-	// private Karma karma;
 	private String karma;
 	private String star;
 	private Date date;

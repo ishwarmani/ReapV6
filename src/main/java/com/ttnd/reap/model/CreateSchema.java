@@ -1,4 +1,4 @@
-package com.ttnd.reap.model;
+/*package com.ttnd.reap.model;
 
 import java.util.Date;
 import java.util.List;
@@ -62,7 +62,7 @@ public class CreateSchema {
 		//.setBadgesRecieved(bpr2);
 	
 		
-		/*bpr.setEmployeeId("INT-16/22");
+		bpr.setEmployeeId("INT-16/22");
 		bpr.setBronzeBadges(1);
 		bpr.setSilverBadges(2);
 		bpr.setGoldBadges(3);
@@ -77,11 +77,11 @@ public class CreateSchema {
 		bpr3.setEmployeeId("INT-16/25");
 		bpr3.setBronzeBadges(1);
 		bpr3.setSilverBadges(2);
-		bpr3.setGoldBadges(3);*/
+		bpr3.setGoldBadges(3);
 		
 		emp.setGivingBadges(bpr);
-		/*emp2.setRecords(bpr2);
-		emp3.setRecords(bpr3);*/
+		emp2.setRecords(bpr2);
+		emp3.setRecords(bpr3);
 		
 		RecognizeKarma rec = new RecognizeKarma();
 		rec.setSenderId("INT-16/22");
@@ -114,8 +114,8 @@ public class CreateSchema {
 		session.save(emp3);
 		//session.save(badges);
 		session.save(bpr);
-		/*session.save(bpr2);
-		session.save(bpr3);*/
+		session.save(bpr2);
+		session.save(bpr3);
 		session.save(rec);
 		
 		session.save(br);
@@ -135,11 +135,11 @@ public class CreateSchema {
 //		System.out.println(em);
 //		 Employee employee= em.get(0);
 		 
-			/*for (Iterator iterator = 
+			for (Iterator iterator = 
 	                em.iterator(); 
 					iterator.hasNext();){
 	  employee = (Employee) iterator.next();
-			}*/
+			}
 //		System.out.println(employee.getEmployeeName()+employee.getEmployeeId()+employee.getEmail()+employee.getUserRole()
 //	+employee);
 		session2.getTransaction().commit();
@@ -150,3 +150,4 @@ public class CreateSchema {
 	}
 
 }
+*/

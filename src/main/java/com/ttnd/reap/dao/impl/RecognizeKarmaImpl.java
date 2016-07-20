@@ -6,34 +6,42 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.ttnd.reap.dao.IRecognizeKarmaDao;
 import com.ttnd.reap.model.RecognizeKarma;
 
-@Component
+@Repository
 public class RecognizeKarmaImpl implements IRecognizeKarmaDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	public RecognizeKarmaImpl(SessionFactory sessionFactory) {
-		// TODO Auto-generated constructor stub
 		this.sessionFactory = sessionFactory;
 	}
 	
 	public void setRecognizeKarma(RecognizeKarma record) {
-		//Session session = ConnectionProvider.getSession();
+		
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		record.setDate(new Date());
-		session.save(record);
-		session.getTransaction().commit();
-		session.close();
+		Transaction transaction = null;
+		try {
+			transaction= session.beginTransaction();
+			record.setDate(new Date());
+			session.save(record);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
 	}
 
 	

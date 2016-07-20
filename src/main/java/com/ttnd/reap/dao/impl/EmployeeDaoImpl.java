@@ -12,6 +12,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.ttnd.reap.dao.IEmployeeDao;
 import com.ttnd.reap.enums.Stars;
@@ -21,7 +22,7 @@ import com.ttnd.reap.model.GivingBadges;
 import com.ttnd.reap.model.RecievedBadges;
 import com.ttnd.reap.model.RecognizeKarma;
 
-@Component
+@Repository
 public class EmployeeDaoImpl implements IEmployeeDao {
 
 	@Autowired

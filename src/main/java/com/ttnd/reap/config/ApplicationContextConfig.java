@@ -25,7 +25,7 @@ import com.ttnd.reap.model.RecognizeKarma;;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.ttnd.reap"})
+@ComponentScan({"com.ttnd.reap.controller","com.ttnd.reap.dao.impl","com.ttnd.reap.service.impl"})
 public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 
 	private BasicDataSource dataSource;
@@ -51,7 +51,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 	public DataSource getDataSource() {
 		dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/ReapV6");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/aakash");
 		dataSource.setUsername("root");
 		dataSource.setPassword("ishwar");
 		return dataSource;
@@ -63,19 +63,20 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.put("hibernate.current_session_context_class", "thread");
-		properties.put("hibernate.hbm2ddl.auto", "create");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 
 	@Bean
 	public SessionFactory getSessionFactory(DataSource dataSource) {
-		LocalSessionFactoryBuilder sesssionBuilder = new LocalSessionFactoryBuilder(dataSource);
-		sesssionBuilder.addProperties(getHibernateProperties());
-		sesssionBuilder.addAnnotatedClasses(Employee.class);
-		sesssionBuilder.addAnnotatedClass(GivingBadges.class);
-		sesssionBuilder.addAnnotatedClass(RecievedBadges.class);
-		sesssionBuilder.addAnnotatedClass(RecognizeKarma.class);
-		SessionFactory sessionFactory = sesssionBuilder.buildSessionFactory();
+		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
+		sessionBuilder.addProperties(getHibernateProperties());
+		sessionBuilder.addAnnotatedClass(RecievedBadges.class);
+		sessionBuilder.addAnnotatedClass(GivingBadges.class);
+		sessionBuilder.addAnnotatedClass(Employee.class);
+		sessionBuilder.addAnnotatedClass(RecognizeKarma.class);
+		
+		SessionFactory sessionFactory = sessionBuilder.buildSessionFactory();
 		return sessionFactory;
 	}
 }

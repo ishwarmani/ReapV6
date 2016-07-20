@@ -90,7 +90,7 @@
                   <strong>Mentorship</strong> - Recognize Mentor\Reporting Manager for their guidance and support in projects\career path, motivating in tough situations, leading by example etc.<br><br>
                   <strong>Pat on the back</strong> - Recognize Newers for a job well done. Give details of the task\activity.<br><br>
                   <strong>Extra Miler</strong> - Recognize a Newer for going above &amp; beyond the call of duty to help achieve organizational objectives pertaining to customer satisfaction, product value add, increased quality standards etc.<br><br>
-                  <strong>For detailed guidelines, <a href="guideline.html">click here</a>
+                  <strong>For detailed guidelines, <a href="guideline.html">click here</a></strong>
                </div>
                <div class="modal-footer">
                   <label for="guideline" class="pointer"><input class="pointer" type="checkbox" id="guideline" onchange="guidelineRead(this);">&nbsp;&nbsp;I have read
@@ -247,9 +247,9 @@
                            <div class="col-sm-3">
                               <form:select class="form-control"  path="star" id="badge">
                                  <option value="0">Select a Badge</option>
-                                 <option value="gold">Gold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getGold()}</option>
-                                 <option value="silver">Silver&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getSilver()}</option>
-                                 <option value="bronze">Bronze&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getBronze()}</option>
+                                 <option value="gold">Gold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${givingBadges.getBadges().getGold()}</option>
+                                 <option value="silver">Silver&nbsp;&nbsp;&nbsp;&nbsp;${givingBadges.getBadges().getSilver()}</option>
+                                 <option value="bronze">Bronze&nbsp;&nbsp;${givingBadges.getBadges().getBronze()}</option>
                               </form:select>
                               
                            </div>
@@ -429,9 +429,9 @@
                                     </th>
                                  </tr>
                                  <tr>
-                                    <td>${loggedInUser.getRecievedBadges().getBadges().getGold()}</td>
-                                    <td>${loggedInUser.getRecievedBadges().getBadges().getSilver()}</td>
-                                    <td>${loggedInUser.getRecievedBadges().getBadges().getBronze()}</td>
+                                    <td>${recievedBadges.getBadges().getGold()}</td>
+                                    <td>${recievedBadges.getBadges().getSilver()}</td>
+                                    <td>${recievedBadges.getBadges().getBronze()}</td>
                                  </tr>
                               </table>
                            </div>
@@ -460,7 +460,13 @@
 
                   <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
       <!-- open -->      <c:forEach  items="${newerBoard}"  var="user"> 	
-              
+              		<div class = "col-xs-5">
+              		<!-- image of newer in this box -->
+              		<%-- <img class="sideBatchPic profile-pic"
+                        src="
+                        <c:url value ="/resources/images/myimage.jpg"/>
+                        "> --%>
+              		</div>
                   <div class="col-xs-7">
                      <div class="row">
                         <div class="row" style="height:30px">

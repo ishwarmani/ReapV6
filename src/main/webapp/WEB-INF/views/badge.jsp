@@ -378,7 +378,7 @@
     <div class="col-md-4">
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading" style="background:#8d9fc4; color:#ffffff" ><img src="assets/icon_badge.png" /> <strong style="font-size:15px" >&nbsp
+          <div class="panel-heading" style="background:#8d9fc4; color:#ffffff" ><img src="resources/images/icon_badge.png" /> <strong style="font-size:15px" >&nbsp
     	  BADGES & POINTS
     	  </strong></div>
         <div class="panel-body">
@@ -426,20 +426,20 @@
                       </div> -->
                       <div class="row">
                               <span>
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recBadges.getBadges().getGold() }</i>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recievedBadges.getBadges().getGold() }</i>
                               </span>
                               <span>
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recBadges.getBadges().getSilver()}</i>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recievedBadges.getBadges().getSilver()}</i>
                               </span>
                               <span>
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recBadges.getBadges().getBronze()}</i>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recievedBadges.getBadges().getBronze()}</i>
                               </span>
                       </div>
             </div>
             <div class="col-lg-4 col-xs-4 col-md-4">
             <img class="points" src="<c:url value ="/resources/images/points.png"/>">
             <div class="caption post-content">
-                <h1>${ loggedInUser.getRecievedBadges().getPoints()} <small>pts</small></h1>
+                <h1>${ recievedBadges.getPoints()} <small>pts</small></h1>
             </div>
 
             </div>

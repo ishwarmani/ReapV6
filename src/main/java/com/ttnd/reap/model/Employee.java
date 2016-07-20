@@ -2,12 +2,15 @@ package com.ttnd.reap.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Employee {
@@ -16,6 +19,7 @@ public class Employee {
 	private int id;
 	private String employeeId;
 	private String employeeName;
+	@Column(unique = true, nullable = false)
 	private String email;
 	private String userRole;
 	private String serviceLine;
@@ -23,8 +27,8 @@ public class Employee {
 	private String practice;
 	private String password;
 	private Byte[] image;
-	// @Type(type = "yes_no")
-	// private Boolean flag;
+	@Type(type = "yes_no")
+	private Boolean flag;
 //
 	@OneToOne // (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "RemainingBadges")
@@ -130,12 +134,12 @@ public class Employee {
 		this.recievedBadges = recievedBadges;
 	}
 
-	// public Boolean getFlag() {
-	// return flag;
-	// }
-	//
-	// public void setFlag(Boolean flag) {
-	// this.flag = flag;
-	// }
+	 public Boolean getFlag() {
+	 return flag;
+	 }
+	
+	 public void setFlag(Boolean flag) {
+	 this.flag = flag;
+	 }
 
 }

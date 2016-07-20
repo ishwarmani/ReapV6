@@ -22,8 +22,8 @@ public class EmployeeService implements IEmployeeService {
 	private IEmployeeDao employeeDao;
 
 	@Override
-	public void register(Employee emp) {
-		employeeDao.register(emp);
+	public boolean register(Employee employee) {
+		return employeeDao.register(employee);
 	}
 
 	@Override
@@ -37,13 +37,13 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public GivingBadges getGivingKittyInfo(String employeeId) {
-		return employeeDao.getGivingKittyInfo(employeeId);
+	public GivingBadges getGivingKittyInfo(int givBadgeId) {
+		return employeeDao.getGivingKittyInfo(givBadgeId);
 	}
 
 	@Override
-	public RecievedBadges getRecievedKittyInfo(int employeeId) {
-		return employeeDao.getRecievedKittyInfo(employeeId);
+	public RecievedBadges getRecievedKittyInfo(int recBadgeId) {
+		return employeeDao.getRecievedKittyInfo(recBadgeId);
 	}
 
 	@Override

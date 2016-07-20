@@ -11,7 +11,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.ttnd.reap.dao.IEmployeeDao;
@@ -60,7 +59,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 	}
 
-	public void register(Employee employee) {
+	public boolean register(Employee employee) {
 
 		GivingBadges records = initBadgesRecord();
 		RecievedBadges recieved = initBadgesRecieved();
@@ -78,8 +77,11 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			employee.setUserRole("User");
 			session.save(employee);
 			transaction.commit();
+			return true;
 		} catch (Exception e) {
+			transaction.rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			session.close();
 		}
@@ -145,7 +147,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			@SuppressWarnings("unchecked")
 			List<Employee> list = criteria.list();
 			employee = (Employee) list.get(0);
-			session.getTransaction().commit();
+
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,7 +159,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public GivingBadges getGivingKittyInfo(String employeeId) {
+	public GivingBadges getGivingKittyInfo(int givBadgeId) {
 
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
@@ -167,7 +169,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(GivingBadges.class);
-			criteria.add(Restrictions.eq("employeeId", employeeId));
+			criteria.add(Restrictions.eq("givBadgeId", givBadgeId));
 			list = criteria.list();
 
 			givKitty = list.get(0);
@@ -181,17 +183,17 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public RecievedBadges getRecievedKittyInfo(int employeeId) {
+	public RecievedBadges getRecievedKittyInfo(int recBadgeId) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		List<RecievedBadges> list = null;
 		RecievedBadges recievedBadges = null;
 
 		try {
-			transaction = session.getTransaction();
+			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(RecievedBadges.class);
-			criteria.add(Restrictions.eq("recBadgeId", employeeId));
+			criteria.add(Restrictions.eq("recBadgeId", recBadgeId));
 
 			list = criteria.list();
 			recievedBadges = (RecievedBadges) list.get(0);
@@ -228,41 +230,26 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 	@Override
 	public Employee findEmployee(String name) {
-
-		// Session session = sessionFactory.openSession();
-		// session.beginTransaction();
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = session.createCriteria(Employee.class);
-		// criteria.add(Restrictions.eq("employeeName", name));
-		// List<Employee> list = criteria.list();
-		// Employee employee = (Employee) list.get(0);
-		// session.getTransaction().commit();
-		// session.close();
-		// return employee;
-		return null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		Employee employee = null;
+		try {
+			transaction = session.beginTransaction();
+			 @SuppressWarnings("deprecation")
+			 Criteria criteria = session.createCriteria(Employee.class);
+			 criteria.add(Restrictions.eq("employeeName", name));
+			 @SuppressWarnings("unchecked")
+			List<Employee> list = criteria.list();
+			employee = (Employee) list.get(0);
+			transaction .commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return employee;
 	}
-	/*
-	 * @Override public void updateRecievedBadges(String employeeId, String
-	 * star) { Session session = sessionFactory.openSession();
-	 * session.beginTransaction();
-	 * 
-	 * @SuppressWarnings("deprecation") Criteria criteria =
-	 * session.createCriteria(Employee.class).add(Restrictions.eq("employeeId",
-	 * employeeId)); Employee employee = (Employee) criteria.uniqueResult();
-	 * RecievedBadges recievedBadges = employee.getRecievedBadges(); int temp;
-	 * if (star.equals("gold")) { temp = recievedBadges.getBadges().getGold();
-	 * recievedBadges.getBadges().setGold(temp + 1); } else if
-	 * (star.equals("silver")) { temp = recievedBadges.getBadges().getSilver();
-	 * recievedBadges.getBadges().setSilver(temp + 1); } else { temp =
-	 * recievedBadges.getBadges().getBronze();
-	 * recievedBadges.getBadges().setBronze(temp + 1); }
-	 * 
-	 * session.update(recievedBadges); session.getTransaction().commit();
-	 * session.close();
-	 * 
-	 * }
-	 */
-
+	
 	@Override
 	public void updateRecievedBadges(String employeeId, String star) {
 		Session session = sessionFactory.openSession();
@@ -340,7 +327,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
-			transaction = session.getTransaction();
+			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(Employee.class).createCriteria("recievedBadges")
 					.addOrder(org.hibernate.criterion.Order.asc("points"));
@@ -388,11 +375,9 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		System.out.println(Id + "------employee name id");
 		try {
 			transaction = session.beginTransaction();
-			// System.out.println("hgygf" + criteria.list());
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(Employee.class).add(Restrictions.eq("id", Id));
 			employee = (Employee) criteria.uniqueResult();
-			// session.getTransaction().commit();
 			transaction.commit();
 
 		} catch (Exception e) {
@@ -412,7 +397,6 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		Transaction transaction = null;
 
 		try {
-			// System.out.println("employee skdjfhkjshfk" + employeeId);
 			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
 			Criteria criteria = session.createCriteria(Employee.class);
@@ -422,10 +406,6 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			employeeName = employee.getEmployeeName();
 			transaction.commit();
 		} catch (Exception e) {
-			// if (transaction != null) {
-			// transaction.rollback();
-			// throw e;
-			// }
 			e.printStackTrace();
 		} finally {
 			session.close();
@@ -458,4 +438,5 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 		return recKarma;
 	}
+	
 }

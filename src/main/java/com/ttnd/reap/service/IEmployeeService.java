@@ -9,15 +9,26 @@ import com.ttnd.reap.dao.util.RecognizeKarmaCopy;
 import com.ttnd.reap.model.Employee;
 
 public interface IEmployeeService {
-	public void register(Employee emp);
-	public Employee login(String email,String Password);
+	
+	public boolean register(Employee emp);
+
+	public Employee login(String email, String Password);
+
 	public Employee getEmployeeInfo(String employeeId);
-	public GivingBadges getGivingKittyInfo(String employeeId);
-	public RecievedBadges getRecievedKittyInfo(int employeeId);
+
+	public GivingBadges getGivingKittyInfo(int givBadgeId);
+
+	public RecievedBadges getRecievedKittyInfo(int recBadgeId);
+
 	public List<Employee> getEmployeeSearchResults();
-	public void updateRecievedBadges(String employeeId,String star);
+
+	public void updateRecievedBadges(String employeeId, String star);
+
 	public List<Employee> employeeList();
+
 	public List<RecievedBadges> getNewerBoardEmployees();
+
 	List<RecognizeKarmaCopy> getEmplList();
+
 	public List<NewerBoard> getNewerList();
 }

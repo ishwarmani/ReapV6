@@ -38,5 +38,9 @@ public interface IEmployeeDao {
 	String findEmployeeName(String employeeId);
 
 	public List<RecognizeKarma> getRecognizeKarmaValues();
+	
+	public List<RecognizeKarma> getRecievedRecognizeKarmaValues(String employeeId);
+	
+	public List<RecognizeKarma> getGivenRecognizeKarmaValues(String employeeId);
 
 }

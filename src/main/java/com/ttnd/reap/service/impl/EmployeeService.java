@@ -99,8 +99,6 @@ public class EmployeeService implements IEmployeeService {
 		for (RecievedBadges recievedBadges : recievedBadgesList) {
 
 			NewerBoard board = new NewerBoard();
-			// System.out.println(recievedBadges);
-			// System.out.println(recievedBadges.getRecBadgeId());
 			String newerName = employeeDao.findEmployeeName(recievedBadges.getRecBadgeId());
 			board.setName(newerName);
 			board.setBadges(recievedBadges.getBadges());
@@ -110,4 +108,66 @@ public class EmployeeService implements IEmployeeService {
 
 		return copies;
 	}
+
+	@Override
+	public List<RecognizeKarmaCopy> getAllBadges(String employeeId) {
+		
+		List<RecognizeKarmaCopy> list1 = getRecievedRecognizeKarmaValues(employeeId);
+		List<RecognizeKarmaCopy> list2 = getGivenRecognizeKarmaValues(employeeId);
+		List<RecognizeKarmaCopy> list = new ArrayList<>();
+		list.addAll(list1);
+		list.addAll(list2);
+		for (RecognizeKarmaCopy recognizeKarmaCopy : list) {
+			System.out.println(recognizeKarmaCopy);
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public List<RecognizeKarmaCopy> getRecievedRecognizeKarmaValues(String employeeId) {
+		
+		List<RecognizeKarma> karma = employeeDao.getRecievedRecognizeKarmaValues(employeeId);
+		List<RecognizeKarmaCopy> karmaCopies = new ArrayList<>();
+
+		for (RecognizeKarma recognizeKarma : karma) {
+			RecognizeKarmaCopy copy = new RecognizeKarmaCopy();
+			String Sname = employeeDao.findEmployeeName(recognizeKarma.getSenderId());
+			copy.setSenderName(Sname);
+			String Rname = employeeDao.findEmployeeName(recognizeKarma.getRecieverId());
+			copy.setRecieverName(Rname);
+			copy.setMessage(recognizeKarma.getMessage());
+			copy.setDate(recognizeKarma.getDate());
+			copy.setKarma(recognizeKarma.getKarma());
+			copy.setStar(recognizeKarma.getStar());
+	
+			karmaCopies.add(copy);
+		}
+
+		return karmaCopies;
+	}
+
+	@Override
+	public List<RecognizeKarmaCopy> getGivenRecognizeKarmaValues(String employeeId) {
+		List<RecognizeKarma> karma = employeeDao.getGivenRecognizeKarmaValues(employeeId);
+		List<RecognizeKarmaCopy> karmaCopies = new ArrayList<>();
+
+		for (RecognizeKarma recognizeKarma : karma) {
+			RecognizeKarmaCopy copy = new RecognizeKarmaCopy();
+			String Sname = employeeDao.findEmployeeName(recognizeKarma.getSenderId());
+			copy.setSenderName(Sname);
+			String Rname = employeeDao.findEmployeeName(recognizeKarma.getRecieverId());
+			copy.setRecieverName(Rname);
+			copy.setMessage(recognizeKarma.getMessage());
+			copy.setDate(recognizeKarma.getDate());
+			copy.setKarma(recognizeKarma.getKarma());
+			copy.setStar(recognizeKarma.getStar());
+	
+			karmaCopies.add(copy);
+		}
+
+		return karmaCopies;
+	}
+
+	
 }

@@ -492,6 +492,30 @@
       <div class="collapse navbar-collapse" id="badges" style="padding:5px;font-size:14px">
         <ul class="nav nav-tabs tab" id="badges">
             <li><a data-toggle="tab" href="#all">ALL(0)</a>
+            <c:forEach var="allBadges"
+										items="${allBadges}">
+										<div class="row">
+											<div class="col-md-2" style="padding-top: 10px">
+												<center>
+													<img src="/REAP/resources/images/my-photo" alt="image"
+														class="img-rounded" width="50px" height="50px">
+												</center>
+											</div>
+											<div class="col-md-10" style="padding-top: 10px">
+												<strong><a
+													href="badge/index/${allBadges.getRecieverName()}">${allBadges.getRecieverName()}</a></strong>
+												 has received ${allBadges.getStar()} <!-- <img src="/REAP/resources/images/silver.png"
+													title="Silver" alt="Silver"> --> from <strong><a
+													href="badge/index/${allBadges.getSenderName()}">${allbadges.getSenderName()}</a></strong>
+												for Karma : ${allBadges.getKarma()}
+												<div>
+													Reason : ${allBadges.getMessage()} <br> <i
+														class="momentDate"> ${allBadges.getDate()} </i>
+												</div>
+											</div>
+										</div>
+										<hr>
+									</c:forEach>
             </li>
             <li><a data-toggle="tab" href="#BadgesShared">BADGES SHARED(0)</a>
             </li>

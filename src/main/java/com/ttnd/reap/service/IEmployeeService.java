@@ -3,6 +3,7 @@ package com.ttnd.reap.service;
 import java.util.List;
 
 import com.ttnd.reap.model.RecievedBadges;
+import com.ttnd.reap.model.RecognizeKarma;
 import com.ttnd.reap.model.GivingBadges;
 import com.ttnd.reap.dao.util.NewerBoard;
 import com.ttnd.reap.dao.util.RecognizeKarmaCopy;
@@ -31,4 +32,10 @@ public interface IEmployeeService {
 	List<RecognizeKarmaCopy> getEmplList();
 
 	public List<NewerBoard> getNewerList();
+
+	public List<RecognizeKarmaCopy> getAllBadges(String employeeId);
+	
+	public List<RecognizeKarmaCopy> getRecievedRecognizeKarmaValues(String employeeId);
+	
+	public List<RecognizeKarmaCopy> getGivenRecognizeKarmaValues(String employeeId);
 }

@@ -372,7 +372,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		Employee employee = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
-		System.out.println(Id + "------employee name id");
+		
 		try {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
@@ -439,4 +439,53 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		return recKarma;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<RecognizeKarma> getRecievedRecognizeKarmaValues(String employeeId) {
+
+		List<RecognizeKarma> recievedKarma = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(RecognizeKarma.class).add(Restrictions.eq("recieverId", employeeId));
+			criteria.addOrder(Order.desc("date"));
+			//criteria.setMaxResults(10);
+			recievedKarma = criteria.list();
+			transaction.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return recievedKarma;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RecognizeKarma> getGivenRecognizeKarmaValues(String employeeId) {
+
+		List<RecognizeKarma> givenKarma = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(RecognizeKarma.class).add(Restrictions.eq("senderId", employeeId));
+			criteria.addOrder(Order.desc("date"));
+			//criteria.setMaxResults(10);
+			givenKarma = criteria.list();
+			transaction.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return givenKarma;
+	}
 }

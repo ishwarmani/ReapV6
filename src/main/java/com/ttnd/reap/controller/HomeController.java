@@ -46,7 +46,7 @@ public class HomeController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView indexSame(HttpSession session) {
 		Employee user = (Employee) session.getAttribute("loggedInUser");
-	//	data = employeeService.getEmployeeSearchResults();
+		// data = employeeService.getEmployeeSearchResults();
 		if (user == null) {
 			return new ModelAndView("register", "employee", new Employee());
 		}
@@ -67,15 +67,16 @@ public class HomeController {
 		boolean flag = employeeService.register(employee);
 		if (flag) {
 			session.setAttribute("loggedInUser", employee);
-			//List<NewerBoard> newerBoard = employeeService.getNewerList();
+			// List<NewerBoard> newerBoard = employeeService.getNewerList();
 			// session.setAttribute("newerBoard", newerBoard);
-			//modelAndView.addObject("newerBoard", newerBoard);
-			//List<RecognizeKarmaCopy> recKarma = employeeService.getEmplList();
+			// modelAndView.addObject("newerBoard", newerBoard);
+			// List<RecognizeKarmaCopy> recKarma =
+			// employeeService.getEmplList();
 			// session.setAttribute("recKarma", recKarma);
-			//modelAndView.addObject("recKarma", recKarma);
+			// modelAndView.addObject("recKarma", recKarma);
 			modelAndView.setViewName("redirect:index");
 			return modelAndView;
-		}else{
+		} else {
 			modelAndView.addObject("msg", "Something went wrong! Please try again.");
 			modelAndView.setViewName("register");
 			modelAndView.addObject("employee", new Employee());
@@ -103,20 +104,23 @@ public class HomeController {
 			return new ModelAndView("redirect:index");
 		}
 
-	//	data = employeeService.getEmployeeSearchResults();
+		// data = employeeService.getEmployeeSearchResults();
 		employee = employeeService.login(email, password);
 		System.out.println(employee);
-		
+
 		if (employee == null) {
-			 ModelAndView modelAndView = new ModelAndView();
-			 modelAndView.addObject("msg","Sorry !     your credentials does not match as in our Database. Try again.");
-			 modelAndView.setViewName("login");
-			 return modelAndView;
-		//return new ModelAndView("login", "msg", "your credentials does not match as in our Database");
-		}/* else if (employee.getUserRole().equals("admin")) {
-			return new ModelAndView("redirect:admin");*/
-	//	}
-			else {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.addObject("msg", "Sorry !     your credentials does not match as in our Database. Try again.");
+			modelAndView.setViewName("login");
+			return modelAndView;
+			// return new ModelAndView("login", "msg", "your credentials does
+			// not match as in our Database");
+		} /*
+			 * else if (employee.getUserRole().equals("admin")) { return new
+			 * ModelAndView("redirect:admin");
+			 */
+		// }
+		else {
 			session.setAttribute("loggedInUser", employee);
 			return new ModelAndView("redirect:index");
 		}
@@ -134,7 +138,8 @@ public class HomeController {
 		List<NewerBoard> newerBoard = employeeService.getNewerList();
 		List<RecognizeKarmaCopy> recKarma = employeeService.getEmplList();
 		GivingBadges givingBadges = employeeService.getGivingKittyInfo(employee.getGivingBadges().getGivBadgeId());
-		RecievedBadges recievedBadges = employeeService.getRecievedKittyInfo(employee.getRecievedBadges().getRecBadgeId());
+		RecievedBadges recievedBadges = employeeService
+				.getRecievedKittyInfo(employee.getRecievedBadges().getRecBadgeId());
 		session.setAttribute("loggedInUser", employee);
 		modelAndView.addObject("newerBoard", newerBoard);
 		modelAndView.addObject("recKarma", recKarma);
@@ -142,7 +147,7 @@ public class HomeController {
 		modelAndView.addObject("givingBadges", givingBadges);
 		modelAndView.addObject("recievedBadges", recievedBadges);
 		modelAndView.setViewName("index");
-		
+
 		return modelAndView;
 	}
 
@@ -154,27 +159,27 @@ public class HomeController {
 
 	@RequestMapping(value = "/karma", method = RequestMethod.POST)
 	public ModelAndView recognizeKarma(@ModelAttribute("karma") RecognizeKarma recognizeKarma, HttpSession session) {
-		
+
 		String recieverId = recognizeKarma.getRecieverId().split(",")[1];
 		recognizeKarma.setRecieverId(recieverId);
 		Employee employee = (Employee) session.getAttribute("loggedInUser");
 		ModelAndView modelAndView = new ModelAndView();
 		if (employee == null) {
-			modelAndView.addObject("msg","login is required");
+			modelAndView.addObject("msg", "login is required");
 			modelAndView.setViewName("redirect:login");
 			return modelAndView;
 		}
 
 		recognizeKarma.setSenderId(employee.getEmployeeId());
 		recognizeKarmaService.setRecognizeKarma(recognizeKarma);
-//		List<NewerBoard> newerBoard = employeeService.getNewerList();
+		// List<NewerBoard> newerBoard = employeeService.getNewerList();
 		session.setAttribute("loggedInUser", employee);
-//
-//		session.setAttribute("newerBoard", newerBoard);
-//
-//		List<RecognizeKarmaCopy> recKarma = employeeService.getEmplList();
-//
-//		session.setAttribute("recKarma", recKarma);
+		//
+		// session.setAttribute("newerBoard", newerBoard);
+		//
+		// List<RecognizeKarmaCopy> recKarma = employeeService.getEmplList();
+		//
+		// session.setAttribute("recKarma", recKarma);
 		modelAndView.setViewName("redirect:index");
 		return modelAndView;
 
@@ -183,12 +188,14 @@ public class HomeController {
 	@RequestMapping(value = "/badge", method = RequestMethod.GET)
 	public ModelAndView getRecievedBadges(HttpSession session) {
 		Employee employee = (Employee) session.getAttribute("loggedInUser");
-		if(employee == null){
+		if (employee == null) {
 			return new ModelAndView("redirect:login");
 		}
 		RecievedBadges recievedBadges = employeeService.getRecievedKittyInfo(employee.getRecievedBadges().getRecBadgeId());
 		ModelAndView model = new ModelAndView("badge");
 		model.addObject("recievedBadges", recievedBadges);
+		List<RecognizeKarmaCopy> allKarma = employeeService.getAllBadges(employee.getEmployeeId());
+		model.addObject("allBadges", allKarma);
 		return model;
 
 	}
@@ -204,8 +211,9 @@ public class HomeController {
 				result.add(employee);
 			}
 		}
-
 		return result;
 	}
+	
+	
 
 }

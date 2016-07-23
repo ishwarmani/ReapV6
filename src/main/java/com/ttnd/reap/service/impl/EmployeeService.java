@@ -45,6 +45,11 @@ public class EmployeeService implements IEmployeeService {
 	public RecievedBadges getRecievedKittyInfo(int recBadgeId) {
 		return employeeDao.getRecievedKittyInfo(recBadgeId);
 	}
+	
+	@Override
+	public RecievedBadges getRecievedKittyInfo(String employeeId) {
+		return employeeDao.getRecievedKittyInfo(employeeId);
+	}
 
 	@Override
 	public List<Employee> getEmployeeSearchResults() {
@@ -128,7 +133,7 @@ public class EmployeeService implements IEmployeeService {
 	public List<RecognizeKarmaCopy> getRecievedRecognizeKarmaValues(String employeeId) {
 		
 		List<RecognizeKarma> karma = employeeDao.getRecievedRecognizeKarmaValues(employeeId);
-		List<RecognizeKarmaCopy> karmaCopies = new ArrayList<>();
+		List<RecognizeKarmaCopy> recKarmaCopies = new ArrayList<>();
 
 		for (RecognizeKarma recognizeKarma : karma) {
 			RecognizeKarmaCopy copy = new RecognizeKarmaCopy();
@@ -140,17 +145,18 @@ public class EmployeeService implements IEmployeeService {
 			copy.setDate(recognizeKarma.getDate());
 			copy.setKarma(recognizeKarma.getKarma());
 			copy.setStar(recognizeKarma.getStar());
-	
-			karmaCopies.add(copy);
+			copy.setSenderId(recognizeKarma.getSenderId());
+			copy.setRecieverId(recognizeKarma.getRecieverId());
+			recKarmaCopies.add(copy);
 		}
 
-		return karmaCopies;
+		return recKarmaCopies;
 	}
 
 	@Override
 	public List<RecognizeKarmaCopy> getGivenRecognizeKarmaValues(String employeeId) {
 		List<RecognizeKarma> karma = employeeDao.getGivenRecognizeKarmaValues(employeeId);
-		List<RecognizeKarmaCopy> karmaCopies = new ArrayList<>();
+		List<RecognizeKarmaCopy> givKarmaCopies = new ArrayList<>();
 
 		for (RecognizeKarma recognizeKarma : karma) {
 			RecognizeKarmaCopy copy = new RecognizeKarmaCopy();
@@ -163,10 +169,10 @@ public class EmployeeService implements IEmployeeService {
 			copy.setKarma(recognizeKarma.getKarma());
 			copy.setStar(recognizeKarma.getStar());
 	
-			karmaCopies.add(copy);
+			givKarmaCopies.add(copy);
 		}
 
-		return karmaCopies;
+		return givKarmaCopies;
 	}
 
 	

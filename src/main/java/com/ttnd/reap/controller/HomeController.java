@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -195,7 +196,14 @@ public class HomeController {
 		ModelAndView model = new ModelAndView("badge");
 		model.addObject("recievedBadges", recievedBadges);
 		List<RecognizeKarmaCopy> allKarma = employeeService.getAllBadges(employee.getEmployeeId());
+		List<RecognizeKarmaCopy> givKarma = employeeService.getGivenRecognizeKarmaValues(employee.getEmployeeId());
+		List<RecognizeKarmaCopy> recKarma = employeeService.getRecievedRecognizeKarmaValues(employee.getEmployeeId());
 		model.addObject("allBadges", allKarma);
+		model.addObject("givBadges", givKarma);
+		model.addObject("recBadges", recKarma);
+//		model.addObject("allSize",allKarma.size());
+//		model.addObject("givSize",givKarma.size());
+//		model.addObject("recSize",recKarma.size());
 		return model;
 
 	}
@@ -214,6 +222,26 @@ public class HomeController {
 		return result;
 	}
 	
-	
+	@RequestMapping(value = "/badges/user/{employeeId}")
+	public ModelAndView employeeBadges(@PathVariable String employeeId, HttpSession session){
+		Employee employee = (Employee) session.getAttribute("loggedInUser");
+		ModelAndView model = new ModelAndView();
+		if (employee == null) {
+			//modelAndView.addObject("msg", "login required");
+			model.setViewName("redirect:login");
+			return model;
+		}
+		RecievedBadges recievedBadges = employeeService.getRecievedKittyInfo(employeeId);
+		
+		model.addObject("recievedBadges", recievedBadges);
+		List<RecognizeKarmaCopy> allKarma = employeeService.getAllBadges(employeeId);
+		List<RecognizeKarmaCopy> givKarma = employeeService.getGivenRecognizeKarmaValues(employeeId);
+		List<RecognizeKarmaCopy> recKarma = employeeService.getRecievedRecognizeKarmaValues(employeeId);
+		model.addObject("allBadges", allKarma);
+		model.addObject("givBadges", givKarma);
+		model.addObject("recBadges", recKarma);
+		model.setViewName("badge");
+		return model;
+	}
 
 }

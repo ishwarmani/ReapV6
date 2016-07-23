@@ -478,7 +478,7 @@
     </div>-->
 
 
-      <nav class="navbar navbar">
+   <!--   <nav class="navbar navbar"> -->
           <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#badges" style="border:1px solid black">
@@ -490,23 +490,43 @@
             </div>
 
       <div class="collapse navbar-collapse" id="badges" style="padding:5px;font-size:14px">
-        <ul class="nav nav-tabs tab" id="badges">
-            <li><a data-toggle="tab" href="#all">ALL(0)</a>
-            <c:forEach var="allBadges"
+        <ul class="nav nav-tabs" id="badges">
+            <li><a data-toggle="tab" href="#all">ALL(${allBadges.size() })</a>
+            
+            </li>
+            <li><a data-toggle="tab" href="#BadgesShared">BADGES SHARED(${givBadges.size() })</a>
+            
+            </li>
+            <li><a data-toggle="tab" href="#BadgesRecieved">BADGES RECIEVED(${recBadges.size() })</a>
+            
+            </li>
+          <li><a data-toggle="tab" href="#BadgesHistory">BADGES HISTORY</a>
+            </li>
+            <li><a data-toggle="tab" href="#PointsRedeemed">POINTS REDEEMED</a>
+            </li> 
+        </ul>
+      </div>
+      </div>
+    <!--   </nav> -->
+
+        <div class="tab-content">
+            <div id="all" class="tab-pane fade in active">
+               <!--  <div class="con">No Data Found</div> -->
+               <c:forEach var="allBadges"
 										items="${allBadges}">
 										<div class="row">
 											<div class="col-md-2" style="padding-top: 10px">
 												<center>
-													<img src="/REAP/resources/images/my-photo" alt="image"
+													<img src="<c:url value ="/resources/images/myimage.jpg"/>" alt="image"
 														class="img-rounded" width="50px" height="50px">
 												</center>
 											</div>
 											<div class="col-md-10" style="padding-top: 10px">
 												<strong><a
-													href="badge/index/${allBadges.getRecieverName()}">${allBadges.getRecieverName()}</a></strong>
+													href="badges/user/${allBadges.getRecieverId()}">${allBadges.getRecieverName()}</a></strong>
 												 has received ${allBadges.getStar()} <!-- <img src="/REAP/resources/images/silver.png"
 													title="Silver" alt="Silver"> --> from <strong><a
-													href="badge/index/${allBadges.getSenderName()}">${allbadges.getSenderName()}</a></strong>
+													href="badges/user/${allBadges.getSenderId()}">${allBadges.getSenderName()}</a></strong>
 												for Karma : ${allBadges.getKarma()}
 												<div>
 													Reason : ${allBadges.getMessage()} <br> <i
@@ -516,29 +536,60 @@
 										</div>
 										<hr>
 									</c:forEach>
-            </li>
-            <li><a data-toggle="tab" href="#BadgesShared">BADGES SHARED(0)</a>
-            </li>
-            <li><a data-toggle="tab" href="#BadgesRecieved">BADGES RECIEVED(0)</a>
-            </li>
-            <li><a data-toggle="tab" href="#BadgesHistory">BADGES HISTORY</a>
-            </li>
-            <li><a data-toggle="tab" href="#PointsRedeemed">POINTS REDEEMED</a>
-            </li>
-        </ul>
-      </div>
-      </div>
-      </nav>
-
-        <div class="tab-content">
-            <div id="all" class="tab-pane fade ">
-                <div class="con">No Data Found</div>
             </div>
             <div id="BadgesShared" class="tab-pane fade">
-                <div class="con">No Data Found</div>
+               <!--  <div class="con">No Data Found</div> -->
+                <c:forEach var="givenKarma"
+										items="${givBadges}">
+										<div class="row">
+											<div class="col-md-2" style="padding-top: 10px">
+												<center>
+													<img src="<c:url value ="/resources/images/myimage.jpg"/>" alt="image"
+														class="img-rounded" width="50px" height="50px">
+												</center>
+											</div>
+											<div class="col-md-10" style="padding-top: 10px">
+												<strong><a
+													href="badges/user/${givenKarma.getRecieverId()}">${givenKarma.getRecieverName()}</a></strong>
+												 has received ${givenKarma.getStar()} <!-- <img src="/REAP/resources/images/silver.png"
+													title="Silver" alt="Silver"> --> from <strong><a
+													href="badges/user/${givenKarma.getSenderId()}">${givenKarma.getSenderName()}</a></strong>
+												for Karma : ${givenKarma.getKarma()}
+												<div>
+													Reason : ${givenKarma.getMessage()} <br> <i
+														class="momentDate"> ${givenKarma.getDate()} </i>
+												</div>
+											</div>
+										</div>
+										<hr>
+									</c:forEach>
             </div>
-            <div id="BadgesRecieved" class="tab-pane fade">
-                <div class="con">No Data Found</div>
+            <div id="BadgesRecieved" class="tab-pane fade in">
+               <!--  <div class="con">No Data Found</div> -->
+               <c:forEach var="recKarma"
+										items="${recBadges}">
+										<div class="row">
+											<div class="col-md-2" style="padding-top: 10px">
+												<center>
+													<img src="<c:url value ="/resources/images/myimage.jpg"/>" alt="image"
+														class="img-rounded" width="50px" height="50px">
+												</center>
+											</div>
+											<div class="col-md-10" style="padding-top: 10px">
+												<strong><a
+													href="badges/user/${recKarma.getRecieverId()}">${recKarma.getRecieverName()}</a></strong>
+												 has received ${recKarma.getStar()} <!-- <img src="/REAP/resources/images/silver.png"
+													title="Silver" alt="Silver"> --> from <strong><a
+													href="badges/user/${recKarma.getSenderId()}">${recKarma.getSenderName()}</a></strong>
+												for Karma : ${recKarma.getKarma()}
+												<div>
+													Reason : ${recKarma.getMessage()} <br> <i
+														class="momentDate"> ${recKarma.getDate()} </i>
+												</div>
+											</div>
+										</div>
+										<hr>
+									</c:forEach>
             </div>
             <div id="BadgesHistory" class="tab-pane fade">
                 <div class="container">

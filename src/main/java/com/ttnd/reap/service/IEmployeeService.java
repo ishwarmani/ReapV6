@@ -20,6 +20,8 @@ public interface IEmployeeService {
 	public GivingBadges getGivingKittyInfo(int givBadgeId);
 
 	public RecievedBadges getRecievedKittyInfo(int recBadgeId);
+	
+	public RecievedBadges getRecievedKittyInfo(String employeeId);
 
 	public List<Employee> getEmployeeSearchResults();
 

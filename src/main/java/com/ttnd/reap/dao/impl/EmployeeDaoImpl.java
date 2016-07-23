@@ -206,7 +206,30 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 		return recievedBadges;
 	}
+	
+	@Override
+	public RecievedBadges getRecievedKittyInfo(String employeeId) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		List<RecievedBadges> list = null;
+		RecievedBadges recievedBadges = null;
 
+		try {
+			transaction = session.beginTransaction();
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(Employee.class).add(Restrictions.eq("employeeId", employeeId));
+			Employee employee = (Employee) criteria.uniqueResult();
+			recievedBadges = employee.getRecievedBadges();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return recievedBadges;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getEmployeeSearchResults() {
@@ -488,4 +511,6 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
 		return givenKarma;
 	}
+
+	
 }

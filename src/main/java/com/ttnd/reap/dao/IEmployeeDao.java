@@ -18,7 +18,9 @@ public interface IEmployeeDao {
 	public GivingBadges getGivingKittyInfo(int givBadgeId);
 
 	public RecievedBadges getRecievedKittyInfo(int recBadgeId);
-
+	
+	public RecievedBadges getRecievedKittyInfo(String employeeId);
+	
 	public Employee findEmployee(String name);
 
 	public void updateRecievedBadges(String employeeId, String star);

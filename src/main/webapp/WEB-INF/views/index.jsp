@@ -363,12 +363,11 @@
                         <c:url value ="/resources/images/myimage.jpg"/>
                         "> 
                      </div>
-			              ${user.getRecieverName()} has received ${user.getStar()} 
+			             <strong> ${user.getRecieverName()} </strong>has received ${user.getStar()} 
 			             
-			              
-			             
-			             from ${user.getSenderName()} for Karma ${user.getKarma()} <br/>
-			                           Reason : ${user.getMessage()} <br/> <hr></hr>   
+			             from <strong> ${user.getSenderName()} </strong> for Karma ${user.getKarma()} <br/>
+			                           Reason : ${user.getMessage()} <br/> 
+			                           Date : <i>${user.getDate()}</i><hr></hr>   
             
             </div>
             	

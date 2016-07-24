@@ -30,7 +30,6 @@
   $("#Practices:first-child").text($(this).text());
   $("#Practices:first-child").val($(this).text());
 });
-
     });
     function checkDetails(){
          var name=$("#exampleInputName2").val();

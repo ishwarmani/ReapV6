@@ -142,12 +142,8 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		try {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("deprecation")
-			Criteria criteria = session.createCriteria(Employee.class);
-			criteria.add(Restrictions.eq("employeeId", employeeId));
-			@SuppressWarnings("unchecked")
-			List<Employee> list = criteria.list();
-			employee = (Employee) list.get(0);
-
+			Criteria criteria = session.createCriteria(Employee.class).add(Restrictions.eq("employeeId", employeeId));
+			employee = (Employee)criteria.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -300,8 +296,8 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 				recievedBadges.getBadges().setBronze(temp + 1);
 				points = recievedBadges.getPoints();
 				recievedBadges.setPoints(points + 10);
-				session.update(recievedBadges);
 			}
+			session.update(recievedBadges);
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -323,7 +319,6 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 			GivingBadges givingBadges = employee.getGivingBadges();
 			int temp;
 			if (star.equals("gold")) {
-
 				temp = givingBadges.getBadges().getGold();
 				givingBadges.getBadges().setGold(temp - 1);
 			} else if (star.equals("silver")) {

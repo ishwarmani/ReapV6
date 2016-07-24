@@ -89,6 +89,8 @@ public class EmployeeService implements IEmployeeService {
 			copy.setDate(recognizeKarma.getDate());
 			copy.setKarma(recognizeKarma.getKarma());
 			copy.setStar(recognizeKarma.getStar());
+			copy.setSenderId(recognizeKarma.getSenderId());
+			copy.setRecieverId(recognizeKarma.getRecieverId());
 			// System.out.println(Sname+recognizeKarma.getSenderId());
 			karmaCopies.add(copy);
 		}

@@ -41,7 +41,7 @@
   	$(document).ready(function() {
 
   		$('#newer-txtbx').autocomplete({
-  			serviceUrl: '${pageContext.request.contextPath}/getEmployee',
+  			serviceUrl: '${pageContext.request.contextPath}/getEmployeeList',
   			paramName: "name",
   			delimiter: ",",
   		    transformResult: function(response) {
@@ -123,7 +123,7 @@
             <div class="collapse navbar-collapse pull-right" id="myNav">
                <ul class="nav navbar-nav">
                   <li class="buttons">
-                     <a href="#">
+                     <a href="admin">
                         <i class="fa fa-tachometer fa-lg" aria-hidden="true"></i>
                         <!-- <img src="assets/icon_dashboard_hover.png" class="hover"> -->
                         <b>Dashboard</b>
@@ -228,9 +228,9 @@
                   <img class="recognizeKarmaIcon" src="
                   <c:url value ="/resources/images/icon_badge.png"/>
                   ">
-                  &nbsp;&nbsp;&nbsp;&nbsp;<b>RECOGNIZE KARMA</b>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<b>Update Role</b>
                </div>
-               <form:form action="karma" method="POST" modelAttribute="karma">
+               <form method="POST" action="admin">
                   <div class="panel-body" >
                      <div class="row" style="padding-left:1%; padding:1%">
                         <div class="form-group">
@@ -240,55 +240,31 @@
                                  <span class="glyphicon glyphicon-user"></span>
                                  </span>
                                 
-                                 <form:input type="text" name="user" path="recieverId" class="form-control" id="newer-txtbx" placeholder="Select a newer"/>
+                                 <input type="text" name="newerId" class="form-control" id="newer-txtbx" placeholder="Select a newer"/>
                               </div>
                            </div>
                            <!-- select badge section -->
-                           <div class="col-sm-3">
-                              <form:select class="form-control"  path="star" id="badge">
-                                 <option value="0">Select a Badge</option>
-                                 <option value="gold">Gold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${givingBadges.getBadges().getGold()}</option>
-                                 <option value="silver">Silver&nbsp;&nbsp;&nbsp;&nbsp;${givingBadges.getBadges().getSilver()}</option>
-                                 <option value="bronze">Bronze&nbsp;&nbsp;${givingBadges.getBadges().getBronze()}</option>
-                              </form:select>
+                           <div class="col-sm-6">
+                              <select class="form-control" id="badge" name = "role">
+                                 <option value="0" >Select a Role</option>
+                                 <option value="Superviser">Superviser<%--  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getGold()} --%></option>
+                                 <option value="Practice Head">Practice Head<%-- &nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getGivingBadges().getBadges().getSilver()} --%></option>
+                 
+                              </select>
                               
-                           </div>
-                           <div class="col-sm-3">
-                              <div class="row">
-                                 <div class="col-sm-12">
-                                    <span class="dd">
-                                       <form:select class="form-control" required="required" path="karma" id="karma">
-                                          <option value="0">Select a Karma</option>
-                                          <option value="Extra Miler">Extra Miler</option>
-                                          <option value="Knowledge Sharing">Knowledge Sharing</option>
-                                          <option value="Mentorship">Mentorship</option>
-                                          <option value="Pat on the back">Pat on the back</option>
-                                          <option value="Customer Delight">Customer Delight</option>
-                                       </form:select>
-                                    </span>
-                                 </div>
-                              </div>
                            </div>
                         </div>
                      </div>
                      <br/>
-                     <div class="row">
-                        <div class="col-sm-12">
-                           <div class="form-group">
-                              <label for="reason" id="reasonlbl">Reason:</label>
-                              <form:textarea class="form-control" rows="6" id="reason" path="message" placeholder="Please select a karma first....."></form:textarea>
-                           </div>
-                        </div>
-                     </div>
                   </div>
                   <div class="panel-footer">
                      <div class="row">
                         <div class="col-sm-12">
-                           <input type="submit" value = "Recognize"class="btn btn-primary recogbt"/>
+                           <input type="submit" value = "Update"class="btn btn-primary recogbt"/>
                         </div>
                      </div>
                   </div>
-               </form:form>
+               </form>
             </div>
             <!-- end karma -->
             <!-- wall of fame -->
@@ -310,7 +286,7 @@
                                     <input type="text" class="form-control"/>
                                  </div>
                               </div>
-                              <div class="col-lg-3">
+                               <div class="col-lg-3">
                                  <select name="serviceLine" class="form-control" defaultLabel="Service Lines" id="serviceLine" >
                                     <option value="">Service Lines</option>
                                     <option value="2" >Analytics</option>
@@ -355,7 +331,7 @@
                     
             
             
-            <c:forEach  items="${recKarma}"  var="user">
+             <c:forEach  items="${recKarma}"  var="user">
             <div class="col-xs-12" >
             			<div class="col-xs-2 " style = "text-align: center;">
                         <img class="imager wallOfFamePost"
@@ -428,9 +404,9 @@
                                     </th>
                                  </tr>
                                  <tr>
-                                    <td>${recievedBadges.getBadges().getGold()}</td>
-                                    <td>${recievedBadges.getBadges().getSilver()}</td>
-                                    <td>${recievedBadges.getBadges().getBronze()}</td>
+                                    <td>${loggedInUser.getRecievedBadges().getBadges().getGold()}</td>
+                                    <td>${loggedInUser.getRecievedBadges().getBadges().getSilver()}</td>
+                                    <td>${loggedInUser.getRecievedBadges().getBadges().getBronze()}</td>
                                  </tr>
                               </table>
                            </div>
@@ -458,7 +434,7 @@
                <div class="row">
 
                   <!-- <div class="col-lg-7 col-sm-9 col-md-7" height="20px"> -->
-      <!-- open -->      <c:forEach  items="${newerBoard}"  var="user"> 	
+      <!-- open -->       <c:forEach  items="${newerBoard}"  var="user"> 	
               		<div class = "col-xs-5">
               		<!-- image of newer in this box -->
               		<%-- <img class="sideBatchPic profile-pic"

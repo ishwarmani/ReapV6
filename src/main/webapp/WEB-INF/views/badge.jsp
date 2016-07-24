@@ -378,7 +378,8 @@
     <div class="col-md-4">
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading" style="background:#8d9fc4; color:#ffffff" ><img src="resources/images/icon_badge.png" /> <strong style="font-size:15px" >&nbsp
+          <div class="panel-heading" style="background:#8d9fc4; color:#ffffff" ><img src="
+                        <c:url value ="/resources/images/icon_badge.png" />"> <strong style="font-size:15px" >&nbsp
     	  BADGES & POINTS
     	  </strong></div>
         <div class="panel-body">
@@ -400,7 +401,7 @@
                       <div class="row">
                           <div class="row" style="height:30px">
                           </div>
-                          <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loggedInUser.getEmployeeName()}</a><br/>
+                          <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${name}</a><br/>
                       </div>
                       <div class="row">
                               <span>
@@ -419,11 +420,6 @@
                            ">
                         </span>
                       </div>
-                      <!-- <div class="row center1">
-                              <img src="assets/icon_gold_badge.png">
-                              <img src="assets/icon_silver_badge.png">
-                              <img src="assets/icon_broze_badge.png">
-                      </div> -->
                       <div class="row">
                               <span>
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>${recievedBadges.getBadges().getGold() }</i>

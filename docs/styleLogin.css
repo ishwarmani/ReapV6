@@ -1,0 +1,56 @@
+*, *:before, *:after {box-sizing:  border-box !important;}
+.login-container {
+    margin: auto;
+    padding-top: 170px;
+    width: 520px;
+  }
+
+  .center {
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #emailInput{
+    width:300px;
+    }
+
+    #passwordInput{
+      width:300px;
+    }
+
+  input {
+      float:right;
+      border:2px solid #dadada;
+      border-radius:7px;
+      font-size:20px;
+      padding:5px;
+      margin-top:-10px;
+  }
+
+  input:focus {
+      outline:none;
+      border-color:#9ecaed;
+      box-shadow:0 0 10px #9ecaed;
+  }
+
+  .shadow {
+      box-shadow:         3px 3px 5px 6px #ccc;
+  }
+
+  .login{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .notamember{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+.panelLogo {
+width:400px;
+height:70px;
+}
+.panelStyle{
+            	width:405px
+            }

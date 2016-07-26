@@ -1,0 +1,56 @@
+*, *:before, *:after {box-sizing:  border-box !important;}
+          .login-container {
+              margin: auto;
+
+              width: 520px;
+            }
+            .center {
+                float: none;
+                margin-left: auto;
+                margin-right: auto;
+              }
+
+
+            input {
+                float:right;
+                border:2px solid #dadada;
+                border-radius:7px;
+                font-size:20px;
+                padding:5px;
+                margin-top:-10px;
+            }
+
+            input:focus {
+                outline:none;
+                border-color:#9ecaed;
+                box-shadow:0 0 10px #9ecaed;
+            }
+            .shadow {
+                box-shadow:         3px 3px 5px 6px #ccc;
+            }
+            .classWithPad { margin:10px; padding:9px; }
+            .classWithPad1 { margin:10px;padding:7px; }
+
+            .buttonPanel{
+              padding-left: 30px;
+              padding-right: 40px;
+            }
+            .inputField{
+              padding-left: 35px;
+            }
+            .formpanel{
+              padding-left:20px;
+            }
+            .imageSubmit{
+              height: 40px;
+            }
+            .panelImage{
+            width:400px;
+            }
+            .submit{
+            padding-left: 40px; 
+            padding-right: 40px;
+            }
+            .panelStyle{
+            	width:405px
+            }
